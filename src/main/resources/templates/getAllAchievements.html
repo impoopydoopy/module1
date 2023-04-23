@@ -1,0 +1,18 @@
+<table>
+  <thead>
+  <tr>
+    <th>Achievements</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="achievement : ${achievementList}">
+    <td>
+      <a th:text="${achievement.name}"></a>
+    </td>
+    <td style="white-space: pre;">        </td>
+    <td th:text="${achievement.description}"></td>
+    <td style="white-space: pre;">        </td>
+    <td th:text="${achievement.points}"></td>
+  </tr>
+  </tbody>
+</table>

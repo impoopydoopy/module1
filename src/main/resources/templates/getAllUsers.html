@@ -1,0 +1,23 @@
+<form th:action="@{/users/search}" method="get">
+  <input type="text" name="nickname" placeholder="Search by nickname">
+  <button type="submit">Search</button>
+</form>
+
+<body>
+<ul>
+<li><a th:href="@{/newUser}">Add new user</a></li>
+</ul>
+</body>
+
+<table>
+  <thead>
+  <tr>
+    <th>Users</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${userList}">
+    <td><a th:href="@{/users/{id}(id=${user.id})}" th:text="${user.nickname}"></a></td>
+  </tr>
+  </tbody>
+</table>

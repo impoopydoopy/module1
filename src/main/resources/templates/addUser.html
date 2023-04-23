@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add User</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Add User</h1>
+<form id="addUserForm">
+  <div>
+    <label for="nickname">Nickname:</label>
+    <input type="text" id="nickname" name="nickname" required>
+  </div>
+  <div>
+    <label for="profileDescription">Profile Description:</label>
+    <input type="text" id="profileDescription" name="profileDescription" required>
+  </div>
+  <button type="submit">Add User</button>
+</form>
+<div id="result"></div>
+
+<script th:inline="javascript">
+  $(document).ready(function() {
+    $('#addUserForm').submit(function(event) {
+      event.preventDefault();
+      var formData = {
+        nickname: $('#nickname').val(),
+        profileDescription: $('#profileDescription').val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/addUser',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(data) {
+          $('#result').text('User added successfully!');
+          $('#nickname').val('');
+          $('#profileDescription').val('');
+        },
+        error: function(data) {
+          $('#result').text('Error occurred while adding user.');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

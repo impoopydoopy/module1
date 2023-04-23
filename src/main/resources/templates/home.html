@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaming Repository</title>
+</head>
+<body>
+<h1>Welcome to gaming repository!</h1>
+<p>Check out these sections:</p>
+<ul>
+    <li><a th:href="@{/getAllUsers}">View Users</a></li>
+    <li><a th:href="@{/getAllGames}">View Games</a></li>
+    <li><a th:href="@{/getAllAchievements}">View Achievements</a></li>
+</ul>
+</body>
+</html>

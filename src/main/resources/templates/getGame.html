@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GG Game Object</title>
+</head>
+<body>
+<h1>GG Game Object</h1>
+<p>ID: <span th:text="${gameDTO.id}"></span></p>
+<p>Name: <span th:text="${gameDTO.name}"></span></p>
+<p>Description: <span th:text="${gameDTO.description}"></span></p>
+<p>Genre: <span th:text="${gameDTO.genre}"></span></p>
+
+<ul>
+    <li><a th:href="@{/updateGame/{id}(id=${gameDTO.id})}">Edit Game</a></li>
+    <li><a th:href="@{/deleteGame/{id}(id=${gameDTO.id})}">Delete Game</a></li>
+</ul>
+
+</body>
+</html>

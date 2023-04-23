@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Game</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Add Game</h1>
+<form id="addGameForm">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
+  </div>
+  <div>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" required>
+  </div>
+  <button type="submit">Add Game</button>
+</form>
+<div id="result"></div>
+
+<script th:inline="javascript">
+  $(document).ready(function() {
+    $('#addGameForm').submit(function(event) {
+      event.preventDefault();
+      var formData = {
+        name: $('#name').val(),
+        description: $('#description').val(),
+        genre: $('#genre').val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/addGame',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(data) {
+          $('#result').text('Game added successfully!');
+        },
+        error: function(data) {
+          $('#result').text('Error occurred while adding game.');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

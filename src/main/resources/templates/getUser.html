@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GG User Profile</title>
+</head>
+<body>
+<h1>User</h1>
+<p>ID: <span th:text="${userDTO.id}"></span></p>
+<p>Nickname: <span th:text="${userDTO.nickname}"></span></p>
+<p>Profile Description: <span th:text="${userDTO.profileDescription}"></span></p>
+<h2>Games:</h2>
+<ul>
+    <li th:each="game : ${gameList}">
+        <span th:text="${game.name}"></span> - <span th:text="${game.genre}"></span>
+    </li>
+</ul>
+
+<h2>Achievements:</h2>
+<ul>
+    <li th:each="achievement : ${achievementsList}">
+        <span th:text="${achievement.name}"></span> - <span th:text="${achievement.description}"></span> - <span th:text="${achievement.points}"></span>
+    </li>
+</ul>
+
+<ul>
+    <li><a th:href="@{/updateUser/{id}(id=${userDTO.id})}">Edit User</a></li>
+    <li><a th:href="@{/deleteUser/{id}(id=${userDTO.id})}">Delete User</a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<form th:action="@{/games/search}" method="get">
+  <input type="text" name="genre" placeholder="Search by genre">
+  <button type="submit">Search</button>
+</form>
+
+<body>
+<ul>
+  <li><a th:href="@{/newGame}">Add new game</a></li>
+</ul>
+</body>
+
+<table>
+  <thead>
+  <tr>
+    <th>Games</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="game : ${gameList}">
+    <td>
+      <a th:href="@{/games/{id}(id=${game.id})}" th:text="${game.name}"></a>
+    </td>
+    <td style="white-space: pre;">        </td>
+    <td th:text="${game.genre}"></td>
+
+  </tr>
+  </tbody>
+</table>

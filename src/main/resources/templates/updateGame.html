@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Game</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Update Game</h1>
+<form id="updateGameForm">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${name}" required>
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="${description}" required>
+  </div>
+  <div>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" th:value="${genre}" required>
+  </div>
+  <button type="submit">Update Game</button>
+</form>
+<div id="result"></div>
+
+<script th:inline="javascript">
+  $(document).ready(function() {
+    $('#updateGameForm').submit(function(event) {
+      event.preventDefault();
+      var formData = {
+        name: $('#name').val(),
+        description: $('#description').val(),
+        genre: $('#genre').val()
+      };
+      var id = [[${id}]];
+      $.ajax({
+        type: 'PUT',
+        url: '/updateGame/' + id,
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(data) {
+          $('#result').text('Game updated successfully!');
+        },
+        error: function(data) {
+          $('#result').text('Error occurred while updating game.');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

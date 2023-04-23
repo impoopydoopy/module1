@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Update User</h1>
+<form id="updateUserForm">
+    <div>
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" th:value="${nickname}" required>
+    </div>
+    <div>
+        <label for="profileDescription">Profile Description:</label>
+        <input type="text" id="profileDescription" name="profileDescription" th:value="${description}" required>
+    </div>
+    <button type="submit">Update User</button>
+</form>
+<div id="result"></div>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        $('#updateUserForm').submit(function(event) {
+            event.preventDefault();
+            var formData = {
+                nickname: $('#nickname').val(),
+                profileDescription: $('#profileDescription').val()
+            };
+            var id = [[${id}]];
+            $.ajax({
+                type: 'PUT',
+                url: '/updateUser/' + id,
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(data) {
+                    $('#result').text('User updated successfully!');
+                },
+                error: function(data) {
+                    $('#result').text('Error occurred while updating user.');
+                }
+            });
+        });
+    });
+</script>
+
+<div>
+    <label for="gameList">Add game to user's library:</label>
+    <select id="gameList" name="gameId">
+        <option value="">--Choose game--</option>
+        <option th:each="gameDTO : ${allGameList}" th:value="${gameDTO.id}" th:text="${gameDTO.name}"></option>
+    </select>
+    <input type="text" id="newGameName" name="newGameName" style="display:none;">
+    <button type="button" onclick="handleClick()">Add</button>
+</div>
+<div id="result1"></div>
+
+<script th:inline="javascript">
+    function handleClick() {
+        var userId = [[${id}]];
+        const gameList = document.getElementById("gameList");
+        const gameId = gameList.value;
+        $.ajax({
+            type: 'GET',
+            url: '/updateUserGame/' + userId + '/' + gameId,
+            success: function(data) {
+                $('#result1').text('Updated successfully!');
+            },
+            error: function(data) {
+                $('#result1').text('Error occurred.');
+            }
+        });
+
+    }
+</script>
+
+<div>
+    <label for="achievementList">Add achievement to user's library:</label>
+    <select id="achievementList" name="achievementId">
+        <option value="">--Choose achievement--</option>
+        <option th:each="achievementDTO : ${allAchievementsList}" th:value="${achievementDTO.id}" th:text="${achievementDTO.name}"></option>
+    </select>
+    <input type="text" id="newAchievementName" name="newAchievementName" style="display:none;">
+    <button type="button" onclick="handleClick1()">Add</button>
+</div>
+<div id="result2"></div>
+
+<script th:inline="javascript">
+    function handleClick1() {
+        var userId = [[${id}]];
+        const achievementList = document.getElementById("achievementList");
+        const achievementId = achievementList.value;
+        $.ajax({
+            type: 'GET',
+            url: '/updateUserAchievement/' + userId + '/' + achievementId,
+            success: function(data) {
+                $('#result2').text('Updated successfully!');
+            },
+            error: function(data) {
+                $('#result2').text('Error occurred.');
+            }
+        });
+
+    }
+</script>
+</body>
+</html>
