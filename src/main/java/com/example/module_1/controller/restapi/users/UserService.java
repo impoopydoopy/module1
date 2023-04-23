@@ -1,6 +1,5 @@
 package com.example.module_1.controller.restapi.users;
 
-import com.example.module_1.controller.model.GameDTO;
 import com.example.module_1.controller.model.UserDTO;
 import com.example.module_1.controller.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
